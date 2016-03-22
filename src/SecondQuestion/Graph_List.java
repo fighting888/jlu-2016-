@@ -1,8 +1,6 @@
-package model;
+package SecondQuestion;
 
 import java.util.Scanner;
-
-import org.omg.PortableInterceptor.IORInterceptor_3_0;
 
 
 public class Graph_List {
