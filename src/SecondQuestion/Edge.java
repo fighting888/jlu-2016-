@@ -1,4 +1,4 @@
-package SecondQuestion;
+package src.SecondQuestion;
 
 public class Edge {
 

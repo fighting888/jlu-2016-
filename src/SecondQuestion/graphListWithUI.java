@@ -1,9 +1,9 @@
-package SecondQuestion;
+package src.SecondQuestion;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import UI.MainFrame;
+import src.UI.MainFrame;
 
 public class graphListWithUI {
 	

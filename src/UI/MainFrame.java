@@ -1,11 +1,11 @@
-package UI;
+package src.UI;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
-import SecondQuestion.*;
-import UI.inputDialog;
+import src.SecondQuestion.*;
+import src.UI.inputDialog;
 
 import javax.swing.*;
 
@@ -75,7 +75,7 @@ public class MainFrame extends JFrame {
 					++GRAPHSIZE;
 					contentPanel.repaint();
 					//创建vertex列表
-					SecondQuestion.Vertex vertex = new Vertex();
+					src.SecondQuestion.Vertex vertex = new Vertex();
 					vertex.VerName = GRAPHSIZE - 1;
 					vertex.setX(arg0.getX());
 					vertex.setY(arg0.getY());
@@ -101,7 +101,7 @@ public class MainFrame extends JFrame {
 				
 				if (x1 != x2 && x1 != -1 && x2 != -1) {
 					// 在vertex的adjacent中插入或者后面的链表插入！！！	
-					SecondQuestion.Edge edge = new Edge();
+					src.SecondQuestion.Edge edge = new Edge();
 					edge.link = null;
 					edge.VerAdj = x2;
 					edge.setStx(tempx[0]);
