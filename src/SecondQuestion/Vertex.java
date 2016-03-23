@@ -3,6 +3,10 @@ package src.SecondQuestion;
 public class Vertex {
 	
 
+	public void setVerName(int verName) {
+		VerName = verName;
+	}
+
 	public int VerName;
 	
 	public Edge adjacent;
@@ -32,6 +36,11 @@ public class Vertex {
 	public Vertex(int VerName) {
 		this.VerName = VerName;
 		this.adjacent = new Edge();
+	}
+
+	public int getVerName() {
+		// TODO Auto-generated method stub
+		return VerName;
 	}
 
 	

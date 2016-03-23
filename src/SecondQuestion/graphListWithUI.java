@@ -27,7 +27,10 @@ public class graphListWithUI {
 	
 	public List<Edge> edges = new ArrayList<>();
 	
+	public List<Edge> highLightEdge = new ArrayList<>();
 	
+	public List<Vertex> highLightVertexs = new ArrayList<>();
+
 	public void insertPost(Vertex vertex, Edge edge) {
 		if (vertex.adjacent == null) {
 			vertex.adjacent = edge;
@@ -69,7 +72,7 @@ public class graphListWithUI {
 		for (int i = 0;i < graphsize; ++i) {
 			ve[i] = 0;
 		}
-		//计算最早发生时间
+		
 		for (int i = 0;i < graphsize - 1; ++i) {
 			edge = vertexs.get(i).adjacent;
 			while (edge != null) {
@@ -80,7 +83,7 @@ public class graphListWithUI {
 				edge = edge.link;
 			}
 		}
-		//计算最迟发生时间
+		
 		for (int i = 0;i < graphsize; ++i) {
 			vl[i] = ve[graphsize-1];
 		}
@@ -94,7 +97,7 @@ public class graphListWithUI {
 				edge = edge.link;
 			}
 		}
-		//求各个活动的最早开始时间和最迟开始时间，一样的就是关键路径
+		
 		for (int i = 0;i < graphsize; ++i) {
 			edge = vertexs.get(i).adjacent;
 			while (edge != null) {
@@ -103,10 +106,67 @@ public class graphListWithUI {
 				int l = vl[k] - edge.cost;
 				if (l == e) {
 					System.out.println("<" + i + "," + k + "> is Critical Activity");
+					Edge pEdge = vertexs.get(i).adjacent;
+					highLightVertexs.add(vertexs.get(i));
+					highLightVertexs.add(vertexs.get(k));
+					while (pEdge.VerAdj != k) {
+						pEdge = pEdge.link;
+					}
+					if (pEdge != null) {
+						highLightEdge.add(edge);
+					}
 				}
 				edge = edge.link;
 			}
 		}
 	}
 
+	public int[] visited;
+	public boolean isClose(int v, int[] visited) {
+		visited = new int[MainFrame.getGraphsize()];
+		for (int i : visited) {
+			visited[i] = 0;
+		}
+		visited[v] = 1; //表示访问过了
+		int w = getFirstNeighbour(v);
+		while (w != -1) {
+			if (visited[w] != 1) {
+				isClose(w, visited);
+			} else if (visited[w] == 1) {
+				return false;
+			}
+			w = getNextNeighbour(v, w);
+		}
+		return true;
+	}
+	
+	public int getFirstNeighbour(int v) {
+		if (v == -1) {
+			return -1;
+		}
+		Edge edge = vertexs.get(v).adjacent;
+		if (edge != null) {
+			return edge.VerAdj;
+		} else {
+			return -1;
+		}
+	}
+	
+	public int getNextNeighbour(int v1, int v2) {
+		if (v1 != -1 && v2 != -1) {
+			Edge edge = vertexs.get(v2).adjacent;
+			while (edge.VerAdj != v2 && edge != null) {
+				edge = edge.link;
+			}
+			if (edge == null) {
+				return -1;
+			}
+			edge = edge.link;
+			if (edge == null) {
+				return -1;
+			}
+			return edge.VerAdj;
+		}
+		return -1;
+	}
 }

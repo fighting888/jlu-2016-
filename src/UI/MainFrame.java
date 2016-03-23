@@ -43,30 +43,24 @@ public class MainFrame extends JFrame {
 		return GRAPHSIZE;
 	}
 
-	
-	public int getGRAPHSIZE() {
-		return GRAPHSIZE;
-	}
-
-
-	public void setGRAPHSIZE(int gRAPHSIZE) {
+	public static void setGRAPHSIZE(int gRAPHSIZE) {
 		GRAPHSIZE = gRAPHSIZE;
 	}
+	
+	public static void setEDGESIZE(int eDGESIZE) {
+		EDGESIZE = eDGESIZE;
+	}
+	
+	final static JFrame mainFrame = new JFrame("DRAW GRAPH");
 
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		final JFrame mainFrame = new JFrame("TEST DRAWING");
+		
 		final DrawPanel contentPanel = new DrawPanel();
 		contentPanel.setBounds(5, 5, 1000, 900);
-		JMenuBar menuBar = new JMenuBar();
-		mainFrame.setJMenuBar(menuBar);
-		JMenu fileMenu = new JMenu("File");
-		menuBar.add(fileMenu);
-		JMenuItem aboutItem = new JMenuItem("about");
-		fileMenu.add(aboutItem);
 		contentPanel.addMouseListener(new MouseAdapter() {
 
 			@Override
@@ -74,9 +68,9 @@ public class MainFrame extends JFrame {
 				if (STATUS == 0) {
 					++GRAPHSIZE;
 					contentPanel.repaint();
-					//创建vertex列表
-					src.SecondQuestion.Vertex vertex = new Vertex();
-					vertex.VerName = GRAPHSIZE - 1;
+					
+					Vertex vertex = new Vertex();
+					vertex.setVerName(GRAPHSIZE - 1);
 					vertex.setX(arg0.getX());
 					vertex.setY(arg0.getY());
 					gUI.vertexs.add(vertex);
@@ -98,10 +92,9 @@ public class MainFrame extends JFrame {
 				tempy[1] = arg0.getY();
 				int x1 = vertexName(tempx[0], tempy[0]);
 				int x2 = vertexName(tempx[1], tempy[1]);
-				
-				if (x1 != x2 && x1 != -1 && x2 != -1) {
-					// 在vertex的adjacent中插入或者后面的链表插入！！！	
-					src.SecondQuestion.Edge edge = new Edge();
+				int[] visited = null;
+				if (x1 != x2 && x1 != -1 && x2 != -1 /*&& gUI.isClose(0, visited)*/) {
+					Edge edge = new Edge();
 					edge.link = null;
 					edge.VerAdj = x2;
 					edge.setStx(tempx[0]);

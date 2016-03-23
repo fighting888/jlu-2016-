@@ -18,16 +18,20 @@ public class inputDialog extends JDialog {
 	public inputDialog(JFrame owner) {
 		super(owner, "dialog Test", true);
 		final JTextArea textArea = new JTextArea();
-		add(new JLabel("输入权值"), BorderLayout.CENTER);
+		add(new JLabel("输入边的权值"), BorderLayout.CENTER);
 		add(textArea);
 		JButton ok = new JButton("OK");
 		ok.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				setVisible(false);
-				MainFrame.keyValues.add(Integer.valueOf(textArea.getText()));
-				System.out.println(textArea.getText());
+				if (isInteger(textArea.getText())) {
+					setVisible(false);
+					MainFrame.keyValues.add(Integer.valueOf(textArea.getText()));
+					System.out.println(textArea.getText());
+				} else {
+					textArea.setText("输入错误请重新输入");
+				}
 			}
 		});
 
@@ -37,5 +41,15 @@ public class inputDialog extends JDialog {
 		panel.add(ok);
 		add(panel, BorderLayout.SOUTH);
 		pack();
+	}
+	
+	public boolean isInteger(String value) {
+		try {
+			Integer.parseInt(value);
+			return true;
+		} catch (NumberFormatException e) {
+			// TODO: handle exception
+			return false;
+		}
 	}
 }
