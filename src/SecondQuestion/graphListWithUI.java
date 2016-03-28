@@ -121,52 +121,70 @@ public class graphListWithUI {
 		}
 	}
 
-	public int[] visited;
-	public boolean isClose(int v, int[] visited) {
-		visited = new int[MainFrame.getGraphsize()];
-		for (int i : visited) {
-			visited[i] = 0;
-		}
-		visited[v] = 1; //表示访问过了
-		int w = getFirstNeighbour(v);
-		while (w != -1) {
-			if (visited[w] != 1) {
-				isClose(w, visited);
-			} else if (visited[w] == 1) {
+	public boolean checkMinus(int[] weight) {
+		for (int i : weight) {
+			if (i <= 0) {
 				return false;
 			}
-			w = getNextNeighbour(v, w);
 		}
 		return true;
 	}
-	
-	public int getFirstNeighbour(int v) {
-		if (v == -1) {
-			return -1;
+	public boolean isClose(int GRAPHSIZE) {
+		int[] weight = findWeight(GRAPHSIZE);		
+		for (int i : weight) {
+			if (i == 0) {
+				Edge pEdge = vertexs.get(i).adjacent;
+				
+					--i;
+				
+				while (pEdge != null) {
+					weight[pEdge.VerAdj]--;
+					pEdge = pEdge.link;
+				}
+			}
 		}
-		Edge edge = vertexs.get(v).adjacent;
-		if (edge != null) {
-			return edge.VerAdj;
+		
+		for (int i : weight) {
+			System.out.println(i + "  " + i);
+		}
+		if (checkMinus(weight)) {
+			System.out.println("回路闭合");
+			return true;
 		} else {
-			return -1;
+			System.out.println("回路不闭合");
+			return false;
 		}
 	}
 	
-	public int getNextNeighbour(int v1, int v2) {
-		if (v1 != -1 && v2 != -1) {
-			Edge edge = vertexs.get(v2).adjacent;
-			while (edge.VerAdj != v2 && edge != null) {
-				edge = edge.link;
-			}
-			if (edge == null) {
-				return -1;
-			}
-			edge = edge.link;
-			if (edge == null) {
-				return -1;
-			}
-			return edge.VerAdj;
+	@SuppressWarnings("unused")
+	public int[] findWeight(int GRAPHSIZE) {
+		int[] count = new int[GRAPHSIZE];
+		for (int c : count) {
+			c = 0;
 		}
-		return -1;
+		for (Vertex i : vertexs) {
+			Edge pEdge = i.adjacent;
+			while (pEdge != null) {
+				++count[pEdge.VerAdj];
+				pEdge = pEdge.link;
+			}
+		}
+		return count;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

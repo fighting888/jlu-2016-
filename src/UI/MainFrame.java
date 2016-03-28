@@ -1,5 +1,6 @@
 package src.UI;
 
+import java.awt.EventQueue;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -58,69 +59,77 @@ public class MainFrame extends JFrame {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
-		final DrawPanel contentPanel = new DrawPanel();
-		contentPanel.setBounds(5, 5, 1000, 900);
-		contentPanel.addMouseListener(new MouseAdapter() {
-
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				if (STATUS == 0) {
-					++GRAPHSIZE;
-					contentPanel.repaint();
-					
-					Vertex vertex = new Vertex();
-					vertex.setVerName(GRAPHSIZE - 1);
-					vertex.setX(arg0.getX());
-					vertex.setY(arg0.getY());
-					gUI.vertexs.add(vertex);
-				} 
-				STATUS = -1;
-				System.out.println("(" + arg0.getX() + "," + arg0.getY() + ")");
-			}
-
-			@Override
-			public void mousePressed(MouseEvent arg0) {
-				tempx[0] = arg0.getX();
-				tempy[0] = arg0.getY();
-				System.out.println("Mouse Pressed : (" + arg0.getX() + "," + arg0.getY() + ")   ");
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent arg0) {
-				tempx[1] = arg0.getX();
-				tempy[1] = arg0.getY();
-				int x1 = vertexName(tempx[0], tempy[0]);
-				int x2 = vertexName(tempx[1], tempy[1]);
-				int[] visited = null;
-				if (x1 != x2 && x1 != -1 && x2 != -1 /*&& gUI.isClose(0, visited)*/) {
-					Edge edge = new Edge();
-					edge.link = null;
-					edge.VerAdj = x2;
-					edge.setStx(tempx[0]);
-					edge.setSty(tempy[0]);
-					edge.setEnx(arg0.getX());
-					edge.setEny(arg0.getY());
-					
-					++EDGESIZE;
-					input = new inputDialog(mainFrame);
-					input.setVisible(true);
-					
-					edge.cost = keyValues.get(EDGESIZE - 1);
-					gUI.insertPost(gUI.vertexs.get(x1), edge);
-					gUI.edges.add(edge);
-					System.out.println("Mouse Released : (" + arg0.getX() + "," + arg0.getY() + ")  edgesize : " + EDGESIZE);
-				}
-				contentPanel.repaint();
+		EventQueue.invokeLater(new Runnable() {
 			
+			@Override
+			public void run() {
+				final DrawPanel contentPanel = new DrawPanel();
+				contentPanel.setBounds(5, 5, 1000, 900);
+				contentPanel.addMouseListener(new MouseAdapter() {
+
+					@Override
+					public void mouseClicked(MouseEvent arg0) {
+						if (STATUS == 0) {
+							++GRAPHSIZE;
+							contentPanel.repaint();
+							
+							Vertex vertex = new Vertex();
+							vertex.setVerName(GRAPHSIZE - 1);
+							vertex.setX(arg0.getX());
+							vertex.setY(arg0.getY());
+							gUI.vertexs.add(vertex);
+						} 
+						STATUS = -1;
+						System.out.println("(" + arg0.getX() + "," + arg0.getY() + ")");
+					}
+
+					@Override
+					public void mousePressed(MouseEvent arg0) {
+						tempx[0] = arg0.getX();
+						tempy[0] = arg0.getY();
+						System.out.println("Mouse Pressed : (" + arg0.getX() + "," + arg0.getY() + ")   ");
+					}
+
+					@Override
+					public void mouseReleased(MouseEvent arg0) {
+						tempx[1] = arg0.getX();
+						tempy[1] = arg0.getY();
+						int x1 = vertexName(tempx[0], tempy[0]);
+						int x2 = vertexName(tempx[1], tempy[1]);
+//						int[] visited = null;
+						if (x1 != x2 && x1 != -1 && x2 != -1 /*&& gUI.isClose(0, visited)*/) {
+							Edge edge = new Edge();
+							edge.link = null;
+							edge.VerAdj = x2;
+							edge.setStx(tempx[0]);
+							edge.setSty(tempy[0]);
+							edge.setEnx(arg0.getX());
+							edge.setEny(arg0.getY());
+							
+							++EDGESIZE;
+							input = new inputDialog(mainFrame);
+							input.setVisible(true);
+							
+							edge.cost = keyValues.get(EDGESIZE - 1);
+							gUI.insertPost(gUI.vertexs.get(x1), edge);
+							gUI.edges.add(edge);
+							System.out.println("Mouse Released : (" + arg0.getX() + "," + arg0.getY() + ")  edgesize : " + EDGESIZE);
+							
+						}
+						contentPanel.repaint();
+					
+					}
+				});
+				mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				contentPanel.setLayout(null);
+				mainFrame.add(contentPanel);
+				mainFrame.setLayout(null);
+				mainFrame.setVisible(true);
+				mainFrame.setBounds(0, 0, 1000, 1000);
 			}
 		});
-		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		contentPanel.setLayout(null);
-		mainFrame.add(contentPanel);
-		mainFrame.setLayout(null);
-		mainFrame.setVisible(true);
-		mainFrame.setBounds(0, 0, 1000, 1000);
+		
+		
 	}
 
 	public static int vertexName(int x, int y) {

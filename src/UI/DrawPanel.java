@@ -106,9 +106,13 @@ public class DrawPanel extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				MainFrame.gUI.printGraph();
-				MainFrame.gUI.CriticalPath();
-				repaint();
+				if (!MainFrame.gUI.isClose(MainFrame.getGraphsize())) {
+					MainFrame.gUI.printGraph();
+					MainFrame.gUI.CriticalPath();
+					repaint();
+				} else {
+					System.out.println("回路闭合，请重新构建");
+				}				
 			}
 			
 		});
