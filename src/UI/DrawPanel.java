@@ -1,6 +1,7 @@
 package src.UI;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -10,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -24,6 +26,8 @@ public class DrawPanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private JLabel statusLabel = new JLabel("STATUS LABEL");
 
 	@Override
 	public void paint(Graphics g) {
@@ -82,6 +86,8 @@ public class DrawPanel extends JPanel {
 		JButton DRect = new JButton("DRAW RECTANGLES");
 		JButton DLine = new JButton("DRAW LINES");
 		JButton Generate = new JButton("Critical");
+		statusLabel.setBounds(200, 0, 500, 160);
+		statusLabel.setFont(new Font("微软雅黑 Light", Font.BOLD, 20));
 		Generate.setBounds(800, 500, 160, 60);
 		DRect.setBounds(800, 100, 160, 60);
 		DRect.addMouseListener(new MouseAdapter() {
@@ -89,6 +95,7 @@ public class DrawPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				MainFrame.STATUS = 0;
+				statusLabel.setText("Drawing Rectangles ");
 			}
 			
 		});
@@ -99,6 +106,7 @@ public class DrawPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				MainFrame.STATUS = 1;
+				statusLabel.setText("Drawing Lines ");
 			}
 			
 		});
@@ -109,8 +117,10 @@ public class DrawPanel extends JPanel {
 				if (!MainFrame.gUI.isClose(MainFrame.getGraphsize())) {
 					MainFrame.gUI.printGraph();
 					MainFrame.gUI.CriticalPath();
+					statusLabel.setText("绘制关键路径");
 					repaint();
 				} else {
+					statusLabel.setText("回路闭合，请重新构建");
 					System.out.println("回路闭合，请重新构建");
 				}				
 			}
@@ -133,6 +143,7 @@ public class DrawPanel extends JPanel {
 		add(DRect);
 		add(DLine);
 		add(Generate);
+		add(statusLabel);
 		MainFrame.mainFrame.setJMenuBar(menuBar);
 	}
 	
@@ -144,6 +155,7 @@ public class DrawPanel extends JPanel {
 		MainFrame.gUI.highLightEdge.clear();
 		MainFrame.setGRAPHSIZE(0);
 		MainFrame.setEDGESIZE(0);
+		statusLabel.setText("擦除重绘中...");
 		repaint();
 	}
 
