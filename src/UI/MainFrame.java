@@ -11,15 +11,9 @@ import src.UI.inputDialog;
 import javax.swing.*;
 
 public class MainFrame extends JFrame {
+
+	final static JFrame mainFrame = new JFrame("DRAW GRAPH");
 	
-	public static int getEDGESIZE() {
-		return EDGESIZE;
-	}
-
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private static inputDialog input;
@@ -52,7 +46,9 @@ public class MainFrame extends JFrame {
 		EDGESIZE = eDGESIZE;
 	}
 	
-	final static JFrame mainFrame = new JFrame("DRAW GRAPH");
+	public static int getEDGESIZE() {
+		return EDGESIZE;
+	}
 
 
 	/**

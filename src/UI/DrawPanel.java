@@ -28,6 +28,8 @@ public class DrawPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	private JLabel statusLabel = new JLabel("STATUS LABEL");
+	
+	private JLabel DrawLabel = new JLabel("STATUS : ");
 
 	@Override
 	public void paint(Graphics g) {
@@ -88,6 +90,8 @@ public class DrawPanel extends JPanel {
 		JButton Generate = new JButton("Critical");
 		statusLabel.setBounds(200, 0, 500, 160);
 		statusLabel.setFont(new Font("Î¢ÈíÑÅºÚ Light", Font.BOLD, 20));
+		DrawLabel.setBounds(100, 0, 100, 160);
+		DrawLabel.setFont(new Font("Î¢ÈíÑÅºÚ Light", Font.BOLD, 20));
 		Generate.setBounds(800, 500, 160, 60);
 		DRect.setBounds(800, 100, 160, 60);
 		DRect.addMouseListener(new MouseAdapter() {
@@ -144,6 +148,7 @@ public class DrawPanel extends JPanel {
 		add(DLine);
 		add(Generate);
 		add(statusLabel);
+		add(DrawLabel);
 		MainFrame.mainFrame.setJMenuBar(menuBar);
 	}
 	
