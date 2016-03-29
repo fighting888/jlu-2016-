@@ -138,11 +138,26 @@ public class DrawPanel extends JPanel {
 		menuBar.add(fileMenu);
 		JMenuItem clearItem = new JMenuItem("clear");
 		fileMenu.add(clearItem);
+		fileMenu.addSeparator();
+		JMenuItem exitItem = new JMenuItem("exit");
+		fileMenu.add(exitItem);
+		fileMenu.setFont(new Font("Î¢ÈíÑÅºÚ Light", Font.BOLD, 20));
+		clearItem.setFont(new Font("Î¢ÈíÑÅºÚ Light", Font.BOLD, 20));
+		exitItem.setFont(new Font("Î¢ÈíÑÅºÚ Light", Font.BOLD, 20));
+		
 		clearItem.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				clearPanel();
+			}
+		});
+		
+		exitItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
 			}
 		});
 
