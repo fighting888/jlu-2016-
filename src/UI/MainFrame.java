@@ -61,6 +61,16 @@ public class MainFrame extends JFrame {
 			public void run() {
 				final DrawPanel contentPanel = new DrawPanel();
 				contentPanel.setBounds(5, 5, 1000, 900);
+				
+				try {
+					UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+					SwingUtilities.updateComponentTreeUI(mainFrame);
+					
+				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+						| UnsupportedLookAndFeelException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				contentPanel.addMouseListener(new MouseAdapter() {
 
 					@Override

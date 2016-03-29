@@ -1,5 +1,6 @@
 package src.UI;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -35,7 +36,8 @@ public class DrawPanel extends JPanel {
 	public void paint(Graphics g) {
 		super.paint(g);
 		Graphics2D graphics2d = (Graphics2D) g;
-		
+		graphics2d.setFont(new Font("Î¢ÈíÑÅºÚ Light", Font.BOLD, 20));
+		graphics2d.setStroke(new BasicStroke(3f));
 		
 		for (int i = 0;i < MainFrame.getGraphsize(); i++) {
 			int x = MainFrame.gUI.getVertexs().get(i).getX();
