@@ -61,7 +61,7 @@ public class MainFrame extends JFrame {
 			public void run() {
 				final DrawPanel contentPanel = new DrawPanel();
 				contentPanel.setBounds(5, 5, 1000, 900);
-				
+				contentPanel.setBorder(BorderFactory.createLoweredBevelBorder());
 				try {
 					UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
 					SwingUtilities.updateComponentTreeUI(mainFrame);
@@ -102,8 +102,7 @@ public class MainFrame extends JFrame {
 						tempy[1] = arg0.getY();
 						int x1 = vertexName(tempx[0], tempy[0]);
 						int x2 = vertexName(tempx[1], tempy[1]);
-//						int[] visited = null;
-						if (x1 != x2 && x1 != -1 && x2 != -1 /*&& gUI.isClose(0, visited)*/) {
+						if (x1 != x2 && x1 != -1 && x2 != -1) {
 							Edge edge = new Edge();
 							edge.link = null;
 							edge.VerAdj = x2;
@@ -131,7 +130,7 @@ public class MainFrame extends JFrame {
 				mainFrame.add(contentPanel);
 				mainFrame.setLayout(null);
 				mainFrame.setVisible(true);
-				mainFrame.setBounds(0, 0, 1000, 1000);
+				mainFrame.setBounds(0, 0, 1030, 1000);
 			}
 		});
 		

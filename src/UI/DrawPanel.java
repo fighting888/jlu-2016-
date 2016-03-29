@@ -96,6 +96,8 @@ public class DrawPanel extends JPanel {
 		DrawLabel.setFont(new Font("Î¢ÈíÑÅºÚ Light", Font.BOLD, 20));
 		Generate.setBounds(800, 500, 160, 60);
 		DRect.setBounds(800, 100, 160, 60);
+		DRect.setMnemonic(java.awt.event.KeyEvent.VK_R);
+		Generate.setMnemonic(java.awt.event.KeyEvent.VK_G);
 		DRect.addMouseListener(new MouseAdapter() {
 
 			@Override
@@ -107,6 +109,7 @@ public class DrawPanel extends JPanel {
 		});
 		
 		DLine.setBounds(800, 300, 160, 60);
+		DLine.setMnemonic(java.awt.event.KeyEvent.VK_L);
 		DLine.addMouseListener(new MouseAdapter() {
 
 			@Override
@@ -144,7 +147,6 @@ public class DrawPanel extends JPanel {
 		fileMenu.setFont(new Font("Î¢ÈíÑÅºÚ Light", Font.BOLD, 20));
 		clearItem.setFont(new Font("Î¢ÈíÑÅºÚ Light", Font.BOLD, 20));
 		exitItem.setFont(new Font("Î¢ÈíÑÅºÚ Light", Font.BOLD, 20));
-		
 		clearItem.addActionListener(new ActionListener() {
 			
 			@Override
