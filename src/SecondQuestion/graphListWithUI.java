@@ -2,6 +2,7 @@ package src.SecondQuestion;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 import src.UI.MainFrame;
 
@@ -120,56 +121,35 @@ public class graphListWithUI {
 			}
 		}
 	}
-
-	public boolean checkMinus(int[] weight) {
-		for (int i : weight) {
-			if (i <= 0) {
-				return false;
-			}
-		}
-		return true;
-	}
-	public boolean isClose(int GRAPHSIZE) {
-		int[] weight = findWeight(GRAPHSIZE);		
-		for (int i : weight) {
-			if (i == 0) {
-				Edge pEdge = vertexs.get(i).adjacent;
-				
-					--i;
-				
-				while (pEdge != null) {
-					weight[pEdge.VerAdj]--;
-					pEdge = pEdge.link;
-				}
-			}
-		}
-		
-		for (int i : weight) {
-			System.out.println(i + "  " + i);
-		}
-		if (checkMinus(weight)) {
-			System.out.println("回路闭合");
-			return true;
-		} else {
-			System.out.println("回路不闭合");
-			return false;
-		}
-	}
 	
 	@SuppressWarnings("unused")
-	public int[] findWeight(int GRAPHSIZE) {
-		int[] count = new int[GRAPHSIZE];
+	public boolean isClose(int n) {
+		int[] count = new int[n];
 		for (int c : count) {
 			c = 0;
 		}
-		for (Vertex i : vertexs) {
-			Edge pEdge = i.adjacent;
+		for (Vertex vertex : vertexs) {
+			Edge pEdge = vertex.adjacent;
 			while (pEdge != null) {
-				++count[pEdge.VerAdj];
+				count[pEdge.VerAdj]++;
 				pEdge = pEdge.link;
 			}
 		}
-		return count;
+		Stack<Integer> top = new Stack<>();
+		for (int i : count) {
+			if (count[i] == 0) {
+				top.add(count[i]);
+			}
+		}
+		
+		//topoOrder
+		for (int i = 0;i < n; ++i) {
+			if (top.isEmpty()) {
+				System.out.println("回路闭合");
+				return true;
+			}
+		}
+		return false;
 	}
 }
 

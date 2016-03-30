@@ -14,6 +14,8 @@ public class MainFrame extends JFrame {
 
 	final static JFrame mainFrame = new JFrame("DRAW GRAPH");
 	
+	final static DrawPanel contentPanel = new DrawPanel();
+	
 	private static final long serialVersionUID = 1L;
 
 	private static inputDialog input;
@@ -59,7 +61,7 @@ public class MainFrame extends JFrame {
 			
 			@Override
 			public void run() {
-				final DrawPanel contentPanel = new DrawPanel();
+				
 				contentPanel.setBounds(5, 5, 1000, 900);
 				contentPanel.setBorder(BorderFactory.createLoweredBevelBorder());
 				try {
@@ -102,7 +104,7 @@ public class MainFrame extends JFrame {
 						tempy[1] = arg0.getY();
 						int x1 = vertexName(tempx[0], tempy[0]);
 						int x2 = vertexName(tempx[1], tempy[1]);
-						if (x1 != x2 && x1 != -1 && x2 != -1) {
+						if (x1 != x2 && x1 != -1 && x2 != -1 && repeatEdge(x1, x2)) {
 							Edge edge = new Edge();
 							edge.link = null;
 							edge.VerAdj = x2;
@@ -122,7 +124,6 @@ public class MainFrame extends JFrame {
 							
 						}
 						contentPanel.repaint();
-					
 					}
 				});
 				mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -150,6 +151,21 @@ public class MainFrame extends JFrame {
 	
 	public static boolean checkSize(int x1, int x2) {
 		return ((x1 <= x2 + 60) && (x1 >= x2 - 60)) ? true : false;
+	}
+	
+	public static boolean repeatEdge(int x1, int x2) {
+		Edge pEdge = gUI.getVertexs().get(x1).adjacent;
+		if (pEdge == null) {
+			return true;
+		}
+		while (pEdge != null) {
+			if (pEdge.VerAdj == x2) {
+				contentPanel.getDrawLabel().setText("路径重复，请重新连接");
+				return false;
+			}
+			pEdge = pEdge.link;
+		}
+		return true;
 	}
 }
 

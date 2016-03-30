@@ -23,6 +23,10 @@ import src.SecondQuestion.Vertex;
 
 public class DrawPanel extends JPanel {
 
+	public JLabel getDrawLabel() {
+		return statusLabel;
+	}
+
 	/**
 	 * 
 	 */
@@ -81,9 +85,7 @@ public class DrawPanel extends JPanel {
 				graphics2d.fill(ellipse2d);
 				graphics2d.drawString(String.valueOf(edge.cost), (x1 + x2)/2, (y1 + y2)/2);
 			}
-		}
-		
-		
+		}		
 	}
 	
 	public DrawPanel() {
