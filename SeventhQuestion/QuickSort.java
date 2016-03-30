@@ -6,15 +6,19 @@ import java.util.Stack;
 public class QuickSort {
 	
 	public static void main(String[] args) {
-		int[] list = { 7, 1,10, 2, 45, 35};
+		int[] list = {23,2,5,50,100,10,30,80,60,90,20,40,70,55,95,15,35,85,65,25,45,75 };
 		for (int d : list) {
 			System.out.print(d + "  ");
 		}
-		System.out.println();
-		Qsort(list, list.length, 6);
+		System.out.println("\n" + list.length);
+		Qsort(list, list.length, M(list.length));
 		for (int i : list) {
 			System.out.print(i + "  ");
 		}
+	}
+	
+	public static int M(int x) {
+		return x < 10 ? 10 : x /2;
 	}
 	
 
@@ -22,11 +26,13 @@ public class QuickSort {
 		Stack<stackType> stack = new Stack<>();
 		stackType temp = new stackType(0, 0);
 		stack.push(temp);
+//		System.out.println(stack.peek().x);
 		int f = 0, t = n-1, j = 0;
 		while (f < t) {
 			j = part(R, f, t);
 			if ((j-f < M) && (t-j < M)) {
 				temp = stack.peek();
+//				System.out.println(temp.x);
 				stack.pop();
 				f = temp.x;
 				t = temp.y;
@@ -53,7 +59,7 @@ public class QuickSort {
 					t = j-1;
 				}
 			}
-			print(R);
+//			print(R);
 		}
 		InsertSort(R, n);
 	}
@@ -76,7 +82,7 @@ public class QuickSort {
 			list[x] = list[y];
 			list[y] = temp;
 		}
-		print(list);
+//		print(list);
 	}
 	
 	public static int part(int[] list, int m, int n) {
@@ -111,12 +117,12 @@ public class QuickSort {
 		return j;
 	}
 	
-	public static void print(int[] list) {
-		for (int k1 : list) {
-			System.out.print(k1 + "  ");
-		}
-		System.out.println();
-	}
+//	public static void print(int[] list) {
+//		for (int k1 : list) {
+//			System.out.print(k1 + "  ");
+//		}
+//		System.out.println();
+//	}
 
 }
 class stackType {
