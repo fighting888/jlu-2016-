@@ -151,6 +151,26 @@ public class graphListWithUI {
 		}
 		return false;
 	}
+	
+	public boolean isSelfClose(int n, int m) {
+		Edge pEdge = vertexs.get(n).adjacent;
+		Edge qEdge = vertexs.get(m).adjacent;
+		while (pEdge != null) {
+			if (m == pEdge.VerAdj) {
+				MainFrame.contentPanel.getDrawLabel().setText("路径自环，连接失败");
+				return true;
+			}
+			pEdge = pEdge.link;
+		}
+		while (qEdge != null) {
+			if (n == qEdge.VerAdj) {
+				MainFrame.contentPanel.getDrawLabel().setText("路径自环，连接失败");
+				return true;
+			}
+			qEdge = qEdge.link;
+		}
+		return false;
+	}
 }
 
 
