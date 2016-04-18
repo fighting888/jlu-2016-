@@ -125,13 +125,14 @@ public class DrawPanel extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (!MainFrame.gUI.isClose(MainFrame.getGraphsize())) {
+				if (!MainFrame.gUI.isClose(MainFrame.getGraphsize()) && !MainFrame.gUI.isIsolate()) {
 					MainFrame.gUI.printGraph();
 					MainFrame.gUI.CriticalPath();
 					statusLabel.setText("绘制关键路径");
 					repaint();
-				} else {
-					statusLabel.setText("回路闭合，请重新构建");
+				}
+				else {
+					statusLabel.setText("回路闭合或孤立，请重新构建");
 					System.out.println("回路闭合，请重新构建");
 				}				
 			}

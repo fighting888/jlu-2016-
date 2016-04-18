@@ -136,17 +136,33 @@ public class graphListWithUI {
 			}
 		}
 		Stack<Integer> top = new Stack<>();
-		for (int i : count) {
+		top.add(-1);
+		for (int i = 0;i < n; ++i) {
 			if (count[i] == 0) {
-				top.add(count[i]);
+				count[i] = top.peek();
+				top.add(i);
 			}
 		}
 		
 		//topoOrder
 		for (int i = 0;i < n; ++i) {
-			if (top.isEmpty()) {
+			if (top.peek() == -1) {
 				System.out.println("回路闭合");
+				MainFrame.contentPanel.getDrawLabel().setText("回路闭合");
 				return true;
+			} else {
+				int j = top.peek();
+				top.pop();
+				Edge pEdge = vertexs.get(j).adjacent;
+				while (pEdge != null) {
+					int k = pEdge.VerAdj;
+					count[k] = count[k] - 1;
+					if (count[k] == 0) {
+						count[k] = top.peek();
+						top.add(k);
+					}
+					pEdge = pEdge.link;
+				}
 			}
 		}
 		return false;
@@ -170,6 +186,43 @@ public class graphListWithUI {
 			qEdge = qEdge.link;
 		}
 		return false;
+	}
+	
+	public boolean isIsolate() {
+		System.out.println("is isolate");
+		for (Vertex vertex : vertexs) {
+			if (inValue(vertex.VerName) == 0 && outValue(vertex.VerName) == 0) {
+				MainFrame.contentPanel.getDrawLabel().setText("存在孤立点，无法构建");
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public int inValue(int x) {
+		int count = 0;
+		for (Vertex vertex : vertexs) {
+			Edge pEdge = vertex.adjacent;
+			while (pEdge != null) {
+				if (pEdge.VerAdj == x) {
+					count++;
+				}
+				pEdge = pEdge.link;
+			}
+		}
+		System.out.println(x + "入读" + count);
+		return count;
+	}
+	
+	public int outValue(int x) {
+		int count = 0;
+		Edge pEdge = vertexs.get(x).adjacent;
+		while (pEdge != null) {
+			count++;
+			pEdge = pEdge.link;
+		}
+		System.out.println(x + "初度" + count);
+		return count;
 	}
 }
 

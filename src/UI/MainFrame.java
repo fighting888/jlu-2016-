@@ -104,7 +104,7 @@ public class MainFrame extends JFrame {
 						tempy[1] = arg0.getY();
 						int x1 = vertexName(tempx[0], tempy[0]);
 						int x2 = vertexName(tempx[1], tempy[1]);
-						if (x1 != x2 && x1 != -1 && x2 != -1 && repeatEdge(x1, x2) && !gUI.isSelfClose(x1, x2)) {
+						if (x1 != x2 && x1 != -1 && x2 != -1 && repeatEdge(x1, x2) && !gUI.isSelfClose(x1, x2) && !gUI.isClose(getGraphsize())) {
 							Edge edge = new Edge();
 							edge.link = null;
 							edge.VerAdj = x2;
@@ -123,6 +123,7 @@ public class MainFrame extends JFrame {
 							System.out.println("Mouse Released : (" + arg0.getX() + "," + arg0.getY() + ")  edgesize : " + EDGESIZE);
 							
 						}
+						
 						contentPanel.repaint();
 					}
 				});
