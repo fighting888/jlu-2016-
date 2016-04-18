@@ -18,11 +18,23 @@ public class codeFrame extends JFrame {
         setContentPane(contentPanel);
     }
 
+    public void addColor(int x) {
+        contentPanel.addColor(x);
+    }
+
+    public void resumeColor(int x) {
+        contentPanel.resumeColor(x);
+    }
+
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
                 codeFrame frame = new codeFrame();
+                frame.addColor(5);
+                frame.addColor(7);
+                frame.addColor(6);
+                frame.resumeColor(6);
             }
         });
 
@@ -60,5 +72,13 @@ class codePanel extends  JPanel{
         label.setFont(new Font("微软雅黑", Font.BOLD, 20));
         this.add(label);
         return label;
+    }
+
+    public void addColor(int x) {
+        codes[x].setForeground(Color.orange);
+    }
+
+    public void resumeColor(int x) {
+        codes[x].setForeground(Color.black);
     }
 }
