@@ -1,12 +1,8 @@
 package SeventhQuestion;
 
-import java.awt.BasicStroke;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.geom.Rectangle2D;
+import java.util.Stack;
 
 import javax.swing.*;
 
@@ -34,12 +30,23 @@ public class numPanel extends JPanel {
 		
 		graphics2d.setStroke(new BasicStroke(3f));
 
-		for (int i = 0;i < num.length; i++) {
-			start = start + 30;
-			Rectangle2D rectangle2d = new Rectangle2D.Double(start, height-num[i] * 5, width, num[i] * 5);
-			graphics2d.draw(rectangle2d);
-			graphics2d.drawString(String.valueOf(num[i]), (int)start+5, (int)height+30);
-        }
+		if (num != null) {
+			for (int i = 0;i < num.length; i++) {
+				start = start + 30;
+
+				Rectangle2D rectangle2d = new Rectangle2D.Double(start, height-num[i] * 5, width, num[i] * 5);
+                if (i % 2 == 0) {
+                    graphics2d.setPaint(Color.ORANGE);
+                } else if (i % 3 == 0) {
+                    graphics2d.setPaint(Color.red);
+                } else {
+                    graphics2d.setPaint(Color.green);
+                }
+				graphics2d.fill(rectangle2d);
+                graphics2d.setPaint(Color.black);
+				graphics2d.drawString(String.valueOf(num[i]), (int)start+5, (int)height+30);
+			}
+		}
 
         System.out.println("paint done");
     }
@@ -47,7 +54,6 @@ public class numPanel extends JPanel {
     public static void setNum(double[] n) {
 		num = n;
 	}
-
 
 
 }

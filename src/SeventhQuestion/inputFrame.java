@@ -39,22 +39,9 @@ public class inputFrame extends JFrame {
 
             @Override
             public void mouseClicked(MouseEvent arg0) {
-
-                for (double l : qSort.list) {
-                    System.out.println(l);
-                }
-
-                QuickSort.frame.changeNum(qSort.list);
-
-                try {
-                    Thread.sleep(1000L);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
                 System.out.println(QuickSort.qSort.getList().length + "    origin list");
 
-                QuickSort.qSort.quickSort(qSort.setList(submitArray()), 0, submitArray().length-1);
+                qSort.judge = false;
 
             }
 

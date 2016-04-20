@@ -16,12 +16,25 @@ public class stackFrame extends JFrame {
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(sPanel);
-        setStack(1);
-        setStack(2);
-        sPanel.repaint();
+//        pushStack(10);
+//        pushStack(30);
+//        try {
+//            Thread.sleep(2000L);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        popStack(30);
     }
 
-    public void setStack(int x) {
-        sPanel.setList(x);
+    public void pushStack(double x) {
+        sPanel.pushStack(x);
+    }
+
+    public void popStack() {
+        sPanel.popStack();
+    }
+
+    public static void main(String[] args) {
+        JFrame frame = new stackFrame();
     }
 }

@@ -41,6 +41,16 @@ public class codeFrame extends JFrame {
     }
 
 
+    public void transColor(int x) {
+        try {
+            addColor(x);
+            Thread.sleep(200L);
+            resumeColor(x);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 
 class codePanel extends  JPanel{
@@ -50,21 +60,21 @@ class codePanel extends  JPanel{
     public codePanel() {
         this.setLayout(new GridLayout(15,1));
         this.setBounds(0, 0, 500, 1000);
-        codes[0] = addLine("if (left < right) {");
-        codes[1] = addLine("    int mid = partition(list2, left, right);");
-        codes[2] = addLine("    if (left < mid - 1) {");
-        codes[3] = addLine("        stack.push(left);  stack.push(right-1);}");
-        codes[4] = addLine("    if (mid + 1 < right) {");
-        codes[5] = addLine("        stack.push(mid + 1);stack.push(right);}");
-        codes[6] = addLine("    while (!stack.isEmpty()) {");
-        codes[7] = addLine("        int q = stack.peek();stack.pop();");
-        codes[8] = addLine("        int p = stack.peek();stack.pop();");
-        codes[9] = addLine("        mid = partition(list2, p, q);");
-        codes[10] = addLine("       if (p < mid - 1) {");
-        codes[11] = addLine("           stack.push(p);stack.push(mid - 1);}");
-        codes[12] = addLine("       if (q > mid + 1) {");
-        codes[13] = addLine("           stack.push(mid + 1);stack.push(q);}");
-        codes[14] = addLine("}");
+        codes[0] = addLine("1 if (left < right) {");
+        codes[1] = addLine("2    int mid = partition(list2, left, right);");
+        codes[2] = addLine("3    if (left < mid - 1) {");
+        codes[3] = addLine("4        stack.push(left);  stack.push(right-1);}");
+        codes[4] = addLine("5    if (mid + 1 < right) {");
+        codes[5] = addLine("6        stack.push(mid + 1);stack.push(right);}");
+        codes[6] = addLine("7    while (!stack.isEmpty()) {");
+        codes[7] = addLine("8        int q = stack.peek();stack.pop();");
+        codes[8] = addLine("9        int p = stack.peek();stack.pop();");
+        codes[9] = addLine("10       mid = partition(list2, p, q);");
+        codes[10] = addLine("11      if (p < mid - 1) {");
+        codes[11] = addLine("12         stack.push(p);stack.push(mid - 1);}");
+        codes[12] = addLine("13      if (q > mid + 1) {");
+        codes[13] = addLine("14          stack.push(mid + 1);stack.push(q);}");
+        codes[14] = addLine("15 }");
     }
 
     public JLabel addLine(String code) {
@@ -81,4 +91,5 @@ class codePanel extends  JPanel{
     public void resumeColor(int x) {
         codes[x].setForeground(Color.black);
     }
+
 }
