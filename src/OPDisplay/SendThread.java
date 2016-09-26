@@ -5,6 +5,8 @@ package OPDisplay;
  */
 public class SendThread extends Thread {
 
+    private static int time = 0;
+
     /**
      * If this thread was constructed using a separate
      * <code>Runnable</code> run object, then that
@@ -19,7 +21,18 @@ public class SendThread extends Thread {
     @Override
     public void run() {
         while (true) {
-
+            try {
+                Thread.sleep(5000);
+                System.out.println(true);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
+    }
+
+
+    public static void main(String[] args) {
+        SendProcess s = new SendProcess(1);
+        (new SendThread()).start();
     }
 }
