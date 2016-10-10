@@ -1,4 +1,4 @@
-package OPDisplay;
+package OPDisplay.util;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,10 +1,12 @@
-package OPDisplay;
+package OPDisplay.DisplayPart;
+
+import OPDisplay.util.Header;
+import OPDisplay.util.JLableFactory;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.util.*;
-import java.util.List;
 
 /**
  * Created by PurpleWall on 2016/9/19.
@@ -38,16 +40,30 @@ public class QueuePanel extends JPanel {
         add(title);
         setBorder(BorderFactory.createMatteBorder(1,1,1,1,Color.BLACK));
 
-        Header h1 = new Header(0, 0, 0);
-        Header h2 = new Header(0, 1, 1);
-        queue.addLast(h1);
-        queue.addLast(h2);
+//        Header h1 = new Header(0, 0, 0);
+//        Header h2 = new Header(0, 1, 1);
+//        queue.addLast(h1);
+//        queue.addLast(h2);
+    }
+
+    public void addQueue(Header header) {
+        queue.addLast(header);
+        System.out.println(header);
+        repaint();
+    }
+
+    public void popQueue() {
+        queue.removeFirst();
+        System.out.println("remove first of buffer");
+        repaint();
     }
 
     @Override
     public void paint(Graphics g) {
 
         int cursor = 10;
+
+        int count = 0;
 
         super.paint(g);
         Graphics2D graphics2D = (Graphics2D) g;
@@ -68,12 +84,14 @@ public class QueuePanel extends JPanel {
 
             graphics2D.fill(rectangle2D);
             graphics2D.setPaint(Color.BLACK);
+            graphics2D.setFont(new Font("微软雅黑", Font.BOLD, 17));
+            graphics2D.drawString(String.valueOf(count++), cursor + 15, 120);
+            graphics2D.setFont(new Font("微软雅黑", Font.BOLD, 10));
             if (MODE == SENDMODE) {
-                graphics2D.drawString("SENDID:" + String.valueOf(header.getRecvId()), cursor + 10, 90);
-            } else if (MODE == RECVMODE) {
                 graphics2D.drawString("RECVID:" + String.valueOf(header.getRecvId()), cursor + 10, 90);
+            } else if (MODE == RECVMODE) {
+                graphics2D.drawString("SENDID:" + String.valueOf(header.getSendId()), cursor + 10, 90);
             }
-
             cursor += 90;
         }
     }

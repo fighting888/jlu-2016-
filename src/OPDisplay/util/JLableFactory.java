@@ -1,7 +1,6 @@
-package OPDisplay;
+package OPDisplay.util;
 
 import javax.swing.*;
-import javax.swing.plaf.FontUIResource;
 import java.awt.*;
 
 /**
@@ -26,6 +25,13 @@ public class JLableFactory {
     public JLabel makeLable(int x, int y, int font, String content) {
         JLabel label = new JLabel(content);
         label.setBounds(x, y, 60, 20);
+        label.setFont(new Font("微软雅黑", Font.BOLD, font));
+        return label;
+    }
+
+    public JLabel makeLable(int x, int y,int width, int height, int font, String content) {
+        JLabel label = new JLabel(content);
+        label.setBounds(x, y, width, height);
         label.setFont(new Font("微软雅黑", Font.BOLD, font));
         return label;
     }
